@@ -29,7 +29,8 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     http
             .authorizeRequests()
-            .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+            .antMatchers("/", "index", "/css/*", "/js/*")
+            .permitAll()
             .antMatchers("/api/**").hasRole(STUDENT.name())
             .anyRequest()
             .authenticated()
@@ -50,9 +51,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(passwordEncoder.encode("password123"))
                 .roles(ADMIN.name())
                 .build();
+
+        UserDetails tomUser = User.builder()
+                .username("tom")
+                .password(passwordEncoder.encode("password123"))
+                .roles(ADMIN.name())
+                .build();
         return new InMemoryUserDetailsManager(
             annaSmithUser,
-                lindaUser
+                lindaUser,
+                tomUser
         );
     }
 }
