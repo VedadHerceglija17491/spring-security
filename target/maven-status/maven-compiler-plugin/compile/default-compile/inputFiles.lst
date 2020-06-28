@@ -1,0 +1,8 @@
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/security/ApplicationSecurityConfig.java
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/student/StudentController.java
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/student/StudentManagementController.java
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/student/Student.java
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/security/PasswordConfig.java
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/security/ApplicationUserPermission.java
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/security/ApplicationUserRole.java
+/home/vherceglij1/spring-security/src/main/java/com/example/demo/DemoApplication.java
