@@ -40,11 +40,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest()
             .authenticated()
             .and()
-            .httpBasic();
+            .formLogin();
     }
 
     @Override
-     @Bean
+    @Bean
     protected UserDetailsService userDetailsService() {
         UserDetails lindaUser = User.builder()
                 .username("linda")
