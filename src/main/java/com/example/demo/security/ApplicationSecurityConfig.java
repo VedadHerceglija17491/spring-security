@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
+import java.util.concurrent.TimeUnit;
+
 import static com.example.demo.security.ApplicationUserRole.*;
 
 @Configuration
@@ -30,22 +32,23 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-    http
+        http
 //            .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 //            .and()
-            .csrf().disable()
-            .authorizeRequests()
-            .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
-            .antMatchers("/api/**").hasRole(STUDENT.name())
-            .anyRequest()
-            .authenticated()
-            .and()
-            .formLogin()
-            .loginPage("/login").permitAll()
-            .defaultSuccessUrl("/courses", true)
-            .and()
-            .rememberMe(); // deafult 2 weeks
-
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
+                .antMatchers("/api/**").hasRole(STUDENT.name())
+                .anyRequest()
+                .authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login").permitAll()
+                .defaultSuccessUrl("/courses", true)
+                .and()
+                .rememberMe()
+                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) // deafult 2 weeks
+                    .key("somethingverysecured");
     }
 
     @Override
@@ -57,7 +60,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles(ADMIN.name())
                 .authorities(ADMIN.getGrantedAuthorities())
                 .build();
-        UserDetails annaSmithUser  = User.builder()
+        UserDetails annaSmithUser = User.builder()
                 .username("annasmith")
                 .password(passwordEncoder.encode("password"))
 //                .roles(STUDENT.name())
