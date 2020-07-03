@@ -48,16 +48,16 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/courses", true)
                 .and()
                 .rememberMe()
-                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) // deafult 2 weeks
-                    .key("somethingverysecured")
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)) // deafult 2 weeks
+                .key("somethingverysecured")
                 .and()
                 .logout()
-                    .logoutUrl("/logout")
-                    .logoutRequestMatcher(new AntPathRequestMatcher("logoutUrl", "GET"))
-                    .clearAuthentication(true)
-                    .invalidateHttpSession(true)
-                    .deleteCookies("remember-me", "JSESSIONID")
-                    .logoutSuccessUrl("/login");
+                .logoutUrl("/logout")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .clearAuthentication(true)
+                .invalidateHttpSession(true)
+                .deleteCookies("remember-me", "JSESSIONID")
+                .logoutSuccessUrl("/login");
     }
 
     @Override
@@ -75,7 +75,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles(STUDENT.name())
                 .authorities(STUDENT.getGrantedAuthorities())
                 .build();
-//fkknasdklsdajlds
         UserDetails tomUser = User.builder()
                 .username("tom")
                 .password(passwordEncoder.encode("password123"))
