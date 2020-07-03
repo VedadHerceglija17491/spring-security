@@ -66,7 +66,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .roles(STUDENT.name())
                 .authorities(STUDENT.getGrantedAuthorities())
                 .build();
-
+//fkknasdklsdajlds
         UserDetails tomUser = User.builder()
                 .username("tom")
                 .password(passwordEncoder.encode("password123"))
